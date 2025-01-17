@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  # RackSessionFix "ActionDispatch::Request::Session::DisabledSessionError"
+  include RackSessionFix
   respond_to :json
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -53,7 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       }
     else
       render json: {
-        status: { code: 422, message: "User can't be created: #{resource.errors.full_error_messages.to_sentence}" }
+        status: { code: 422, message: "User can't be created: #{resource.errors.full_messages.to_sentence}" }
       }, status: :unprocessable_entity
     end
   end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  # RackSessionFix "ActionDispatch::Request::Session::DisabledSessionError"
+  include RackSessionFix
   respond_to :json
 
   private
