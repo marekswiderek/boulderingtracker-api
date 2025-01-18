@@ -1,6 +1,7 @@
 class Api::V1::CountriesController < ApplicationController
   before_action :set_api_v1_country, only: [ :show, :update, :destroy ]
   before_action :authenticate_user!, only: [ :create, :update, :destroy ]
+  before_action :authorize_admin, only: [ :create, :update, :destroy ]
 
   # GET /api/v1/countries
   def index
@@ -48,5 +49,10 @@ class Api::V1::CountriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def api_v1_country_params
       params.fetch(:api_v1_country, {})
+    end
+
+    # Check if current_user has assigned role 'admin'
+    def authorize_admin
+      render json: { error: "You need to sign in as admin before continuing." }, status: :unauthorized unless current_user.admin?
     end
 end
