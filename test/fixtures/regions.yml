@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  boulders: 1
+  boulders_count: 1
   country: one
 
 two:
   name: MyString
-  boulders: 1
+  boulders_count: 1
   country: two
