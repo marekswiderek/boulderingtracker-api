@@ -20,7 +20,7 @@ class Api::V1::CountriesController < ApplicationController
     @country = Country.new(api_v1_country_params)
 
     if @country.save
-      render json: CountrySerializer.new(@country), status: :created, location: @country
+      render json: CountrySerializer.new(@country), status: :created
     else
       render json: @country.errors, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class Api::V1::CountriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def api_v1_country_params
-      params.fetch(:api_v1_country, {})
+      params.require(:country).permit(:name)
     end
 
     # Check if current_user has assigned role 'admin'
