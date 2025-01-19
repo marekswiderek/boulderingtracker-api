@@ -6,6 +6,6 @@ class Region < ApplicationRecord
 
   private
   def set_default_boulders_count
-    self.boulders = 0
+    self.boulders_count = 0
   end
 end

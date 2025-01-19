@@ -5,7 +5,7 @@ class Api::V1::BouldersController < ApplicationController
 
   # GET /api/v1/boulders
   def index
-    @api_v1_boulders = Boulder.all
+    @boulders = Boulder.all
 
     render json: @boulders
   end

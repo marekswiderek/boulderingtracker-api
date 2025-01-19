@@ -3,18 +3,20 @@ class Boulder < ApplicationRecord
 
   before_create :set_default_ascents_count
   after_create :increase_region_boulders_count
-  after_delete :decrease_region_boulders_count
+  after_destroy :decrease_region_boulders_count
 
   private
   def set_default_ascents_count
-    self.ascents = 0
+    self.ascents_count = 0
   end
 
   def increase_region_boulders_count
-    self.region.boulders += 1
+    self.region.boulders_count += 1
+    self.region.save
   end
 
   def decrease_region_boulders_count
-    self.region.boulders -= 1
+    self.region.boulders_count -= 1
+    self.region.save
   end
 end
