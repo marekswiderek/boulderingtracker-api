@@ -1,5 +1,6 @@
 class Region < ApplicationRecord
   belongs_to :country
+  has_many :boulders
 
   before_create :set_default_boulders_count
 

@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_18_234939) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_19_172700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boulders", force: :cascade do |t|
+    t.string "name"
+    t.string "grade"
+    t.integer "ascents"
+    t.bigint "region_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_boulders_on_region_id"
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
@@ -53,6 +63,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_18_234939) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "boulders", "regions"
   add_foreign_key "regions", "countries"
   add_foreign_key "roles", "users"
 end
