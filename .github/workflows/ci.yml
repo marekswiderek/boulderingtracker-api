@@ -76,10 +76,10 @@ jobs:
           # REDIS_URL: redis://localhost:6379/0
           RAILS_MASTER_KEY: ${{secrets.RAILS_MASTER_KEY}}
           SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-        run: bin/rails db:test:prepare test test:system
+        run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.0
         if: failure()
         with:
           name: screenshots
