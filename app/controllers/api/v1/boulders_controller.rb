@@ -12,7 +12,7 @@ class Api::V1::BouldersController < ApplicationController
 
   # GET /api/v1/boulders/1
   def show
-    render json: @boulder
+    render json: BoulderSerializer.new(@boulder, include: [ :ascents ])
   end
 
   # POST /api/v1/boulders

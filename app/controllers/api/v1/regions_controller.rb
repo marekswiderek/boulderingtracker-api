@@ -12,7 +12,7 @@ class Api::V1::RegionsController < ApplicationController
 
   # GET /api/v1/regions/1
   def show
-    render json: @region
+    render json: RegionSerializer.new(@region, include: [ :boulders ])
   end
 
   # POST /api/v1/regions
