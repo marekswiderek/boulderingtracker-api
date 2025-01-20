@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_19_194035) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_20_133457) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ascents", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "boulder_id", null: false
+    t.date "ascent_date"
+    t.integer "attempts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["boulder_id"], name: "index_ascents_on_boulder_id"
+    t.index ["user_id"], name: "index_ascents_on_user_id"
+  end
 
   create_table "boulders", force: :cascade do |t|
     t.string "name"
@@ -63,6 +74,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_19_194035) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ascents", "boulders"
+  add_foreign_key "ascents", "users"
   add_foreign_key "boulders", "regions"
   add_foreign_key "regions", "countries"
   add_foreign_key "roles", "users"

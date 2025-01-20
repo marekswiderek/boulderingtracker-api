@@ -1,5 +1,6 @@
 class Boulder < ApplicationRecord
   belongs_to :region
+  has_many :ascents
 
   before_create :set_default_ascents_count
   after_create :increase_region_boulders_count

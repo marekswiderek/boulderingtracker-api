@@ -17,7 +17,7 @@ RSpec.describe "Countries", type: :request do
       expect(response).to have_http_status(:unauthorized)
     end
 
-    # TO-DO: Authenticate user & include token in header
+    # TO-DO: Authenticate user & include jti token in header
     # scenario "POST /api/v1/countries - admin" do
     #   post api_v1_countries_path, params: { name: "Switzerland" }
     #   expect(response).to have_http_status(:created)

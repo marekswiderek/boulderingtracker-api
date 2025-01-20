@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_create :set_default_user_role
 
   has_many :roles
+  has_many :ascents
 
   def admin?
     self.roles.map { |r| r[:name] }.include? "admin"
