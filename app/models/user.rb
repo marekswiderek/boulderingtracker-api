@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   before_create :set_default_user_role
 
+  validates :name, :surname, presence: true
+
   has_many :roles
   has_many :ascents
 

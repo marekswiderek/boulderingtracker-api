@@ -5,6 +5,8 @@ class Ascent < ApplicationRecord
   after_create :increase_boulder_ascents_count
   after_destroy :decrease_boulder_ascents_count
 
+  validates :user_id, :boulder_id, :ascent_date, :attempts, presence: true
+
   private
   def increase_boulder_ascents_count
     self.boulder.ascents_count += 1
