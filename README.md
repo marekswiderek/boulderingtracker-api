@@ -1,24 +1,6 @@
-# README
+# boulderingtracker-api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple API that allows users with `admin` role assigned to create list of **bouldering regions** assigned to specific **countries**. Each **bouldering region** has associated **boulders**. Users with default role `user` can log their **ascents** regarding specific **boulders**.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## api/v1 documentation
+Documentation for api/v1 is available on wiki [api/v1 documentation wiki](./wiki)

@@ -7,12 +7,12 @@ class Api::V1::RegionsController < ApplicationController
   def index
     @regions = Region.all
 
-    render json: @regions
+    render json: @regions.to_json(except: [ :created_at, :updated_at ])
   end
 
   # GET /api/v1/regions/1
   def show
-    render json: RegionSerializer.new(@region, include: [ :boulders ])
+    render json: RegionSerializer.new(@region, { include: [ :boulders ], pluralize_type: false })
   end
 
   # POST /api/v1/regions
@@ -20,7 +20,7 @@ class Api::V1::RegionsController < ApplicationController
     @region = Region.new(api_v1_region_params)
 
     if @region.save
-      render json: @region, status: :created
+      render json: @region.to_json(except: [ :updated_at ]), status: :created
     else
       render json: @region.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::RegionsController < ApplicationController
   # PATCH/PUT /api/v1/regions/1
   def update
     if @region.update(api_v1_region_params)
-      render json: @region
+      render json: @region.to_json(except: [ :created_at ])
     else
       render json: @region.errors, status: :unprocessable_entity
     end
