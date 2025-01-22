@@ -11,6 +11,6 @@ RSpec.describe "Countries", type: :request do
     get api_v1_country_path(@country_id)
     expect(response).to have_http_status(:success)
     country = JSON.parse(response.body)
-    expect(country["data"]["attributes"]["name"]).to eq("Poland")
+    expect(country["name"]).to eq("Poland")
   end
 end

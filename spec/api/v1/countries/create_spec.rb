@@ -11,7 +11,7 @@ RSpec.describe "Countries", type: :request do
   # Anonymous (not logged-in) user shouldn't be able to create new Country record
   # So we expect 401 http status code reponse
   scenario "POST /api/v1/countries - unauthenitcated" do
-      post api_v1_countries_path, params: { name: "Switzerland" }
+      post api_v1_countries_path, params: `{"country":{"name":"Switzerland"}}`
       expect(response).to have_http_status(:unauthorized)
     end
 
@@ -28,6 +28,6 @@ RSpec.describe "Countries", type: :request do
     post api_v1_countries_path, params: '{"country":{"name":"Switzerland"}}', headers: provide_auth_headers(@admin)
     expect(response).to have_http_status(:created)
     country = JSON.parse(response.body)
-    expect(country["data"]["attributes"]["name"]).to eq("Switzerland")
+    expect(country["name"]).to eq("Switzerland")
   end
   end
