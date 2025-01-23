@@ -7,12 +7,12 @@ class Api::V1::AscentsController < ApplicationController
   def index
     @ascents = Ascent.all
 
-    render json: @ascents
+    render json: @ascents.to_json(except: [ :created_at, :updated_at ])
   end
 
   # GET /api/v1/ascents/1
   def show
-    render json: @ascent
+    render json: @ascent.to_json(except: [ :created_at, :updated_at ])
   end
 
   # POST /api/v1/ascents
@@ -20,7 +20,7 @@ class Api::V1::AscentsController < ApplicationController
     @ascent = Ascent.new(api_v1_ascent_params)
 
     if @ascent.save
-      render json: @ascent, status: :created
+      render json: @ascent.to_json(except: [ :updated_at ]), status: :created
     else
       render json: @ascent.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::AscentsController < ApplicationController
   # PATCH/PUT /api/v1/ascents/1
   def update
     if @ascent.update(api_v1_ascent_params)
-      render json: @ascent
+      render json: @ascent.to_json(except: [ :created_at ])
     else
       render json: @ascent.errors, status: :unprocessable_entity
     end

@@ -7,7 +7,7 @@ class Api::V1::BouldersController < ApplicationController
   def index
     @boulders = Boulder.all
 
-    render json: @boulders
+    render json: @boulders.to_json(except: [ :created_at, :updated_at ])
   end
 
   # GET /api/v1/boulders/1
@@ -20,7 +20,7 @@ class Api::V1::BouldersController < ApplicationController
     @boulder = Boulder.new(api_v1_boulder_params)
 
     if @boulder.save
-      render json: @boulder, status: :created
+      render json: @boulder.to_json(except: [ :updated_at ]), status: :created
     else
       render json: @boulder.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::BouldersController < ApplicationController
   # PATCH/PUT /api/v1/boulders/1
   def update
     if @boulder.update(api_v1_boulder_params)
-      render json: @boulder
+      render json: @boulder.to_json(except: [ :created_at ])
     else
       render json: @boulder.errors, status: :unprocessable_entity
     end
