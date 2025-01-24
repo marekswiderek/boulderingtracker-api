@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # RackSessionFix "ActionDispatch::Request::Session::DisabledSessionError"
   include RackSessionFix
   respond_to :json
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [ :create ]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -54,6 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         status: { code: 200, message: "User deleted succesfully." }
       }
     else
+      puts "User: #{resource.name}"
       render json: {
         status: { code: 422, message: "User can't be created: #{resource.errors.full_messages.to_sentence}" }
       }, status: :unprocessable_entity
